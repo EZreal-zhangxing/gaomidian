@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>文章管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="介绍如何搭建Bootstrap里面HTML基本元素，并利用可扩展的class增强其展示效果。">
+    <meta name="keywords" content="">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/docs.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+	<link href="css/video-js.min.css" rel="stylesheet">
+	<script src="js/video.min.js"></script>
+	<link rel="stylesheet" href="css/bootstrap-select.css">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+    <!-- Le fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="img/favicon.png">
+
+  </head>
+  <body data-spy="scroll" data-target=".bs-docs-sidebar" onload="loadArticel()">
+
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+		  <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="">
+					<a href="adminyfc.html">悦风采</a>
+              </li>
+			  <li class="">
+					<a href="adminysh.html">悦生活</a>
+              </li>
+			  <li class="">
+					<a href="adminypd.html">悦品读</a>
+              </li>
+			  <li class="">
+					<a href="comment.html">评论管理</a>
+              </li>
+              <li class="">
+	                <a href="edit.html" target="_blank">添加文章</a>
+              </li>
+			  <li class="">
+	                <a href="changebanner.html">修改banner</a>
+              </li>
+			  <li class="">
+	                <a href="yuyue.html" target="_blank">预约</a>
+              </li>
+			  <li class="active">
+	                <a href="video.html">精彩花絮视频管理</a>
+              </li>
+			  <li class="">
+	                <a href="adminuser.html">用户管理</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Subhead
+================================================== -->
+<header class="jumbotron subhead" id="overview">
+  <div class="container">
+    <h1>精彩花絮视频管理</h1>
+    <p class="lead">精彩花絮视频信息管理。</p>
+  </div>
+</header>
+
+
+  <div class="container">
+    <!-- Docs nav
+    ================================================== -->
+    <div class="row">
+      <div class="width:100%">
+        <!-- Forms
+        ================================================== -->
+        <section id="#model1">
+          <div class="page-header">
+            <h1>精彩花絮视频维护</h1>
+          </div>
+		 <div class="bs-docs-example">
+		 <form id="uploadform" action="/uploadVoide" method="post" enctype="multipart/form-data">
+			<div class="form-horizontal">
+				<div class="control-group">
+					<label class="control-label" for="inputEmail">视频</label>
+					<div class="controls">
+							<input id="lefile" type="file" name="filepath" style="display:none"></input>
+							<div class="input-append">
+								<input id="photoCover" type="text" class="input-large"></input>
+								<a class="btn btn-success" onclick="$('input[id=lefile]').click();"><i class="icon-white icon-folder-open"></i> Browse</a>
+								<a class="btn btn-primary" onclick="upload()">upload file</a>
+							</div>		
+					</div>
+				</div>
+			</div>
+		</form>
+		 </div>
+          <div class="bs-docs-example">
+            <table class="table table-hover table-bordered" style="table-layout:fixed;">
+              <thead>
+                <tr>
+                  <th width="2px">#</th>
+				  <th width="60px">文章名</th>
+				  <th width="60px">文件名</th>
+                  <th width="60px">文件路径</th>
+				  <th width="60px">文件大小</th>
+                  <th width="145px">文件视频</th>
+				  <th width="60px">操作</th>
+                </tr>
+              </thead>
+              <tbody id="articelBody">
+              	
+              </tbody>
+            </table>
+		
+			</div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+  </div>
+
+  <!--消息model-->
+	<div id="messageModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel"></h3>
+	  </div>
+	  <div class="modal-body">
+		<p><h4 align="center" id="myModalContent"></h4></p>
+	  </div>
+	  <div class="modal-footer" id="message_buttons">
+		<button id="message_button_no" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</button>
+	  </div>
+	</div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap-transition.js"></script>
+    <script src="js/bootstrap-alert.js"></script>
+    <script src="js/bootstrap-modal.js"></script>
+    <script src="js/bootstrap-dropdown.js"></script>
+    <script src="js/bootstrap-scrollspy.js"></script>
+    <script src="js/bootstrap-tab.js"></script>
+    <script src="js/bootstrap-tooltip.js"></script>
+    <script src="js/bootstrap-popover.js"></script>
+    <script src="js/bootstrap-button.js"></script>
+    <script src="js/bootstrap-collapse.js"></script>
+    <script src="js/bootstrap-carousel.js"></script>
+    <script src="js/bootstrap-typeahead.js"></script>
+    <script src="js/bootstrap-affix.js"></script>
+
+    <script src="js/holder.js"></script>
+    <script src="js/prettify.js"></script>
+
+    <script src="js/application.js"></script>
+    <script type="text/javascript">
+		$('input[id=lefile]').change(function() {
+			$('#photoCover').val($(this).val());
+		});
+		function upload()
+		{
+			$('#uploadform').submit();
+		}
+		
+		function loadArticel()
+		{
+			var url="/getAllvideo";
+			var tdstr="";
+			$.ajax({
+				url:url,
+				type:'post',
+				async:'false',
+				success:function(data)
+				{
+					console.log(data);
+					var video=eval(data);
+					for(var i=0;i<video.length;i++)
+					{
+						tdstr+="<tr class='' id=''>";
+						tdstr+="<td id='videoId' style='word-wrap:break-word;'>"+video[i].id+"</td>";
+						if(video[i].title == null)
+						{
+							tdstr+="<td id='videoarticelName' style='word-wrap:break-word;'>无</td>";
+						}else
+						{
+							tdstr+="<td id='videoarticelName' style='word-wrap:break-word;'>"+video[i].title+"</td>";
+						}
+						tdstr+="<td id='videoName' style='word-wrap:break-word;'>"+video[i].videoName+"</td>";
+						tdstr+="<td id='videoPath' style='word-wrap:break-word;'>"+video[i].videoPath+"</td>";
+						tdstr+="<td id='videosize' style='word-wrap:break-word;'>"+Math.round(parseFloat(video[i].filesize)/1024/1024)+"M</td>";
+						tdstr+="<td id='video' style='word-wrap:break-word;'><video id='example_video_1' class='video-js vjs-default-skin vjs-big-play-centered' controls preload='none' width='512' height='512' poster='http://video-js.zencoder.com/oceans-clip.png' data-setup='{}'>"+
+							"<source src='/readpicFile?filepath="+video[i].videoPath+"' type='video/mp4' />"+
+							"<source src='/readpicFile?filepath="+video[i].videoPath+"' type='video/webm' />"+
+							"<source src='/readpicFile?filepath="+video[i].videoPath+"' type='video/ogg' />"+
+							"<track kind='captions' src='demo.captions.vtt' srclang='en' label='English'></track><!-- Tracks need an ending tag thanks to IE9 -->"+
+							"<track kind='subtitles' src='demo.captions.vtt' srclang='en' label='English'></track><!-- Tracks need an ending tag thanks to IE9 -->"+
+							"</video></td>";
+						tdstr+="<td id='operation' style='word-wrap:break-word;'><button id='updatebtn' class='btn btn-danger' type='button' onclick='deleteban("+video[i].id+")'><i class='icon-trash icon-white'></i>删除</button></td>";
+						tdstr+="</tr>";
+					}
+					$('#articelBody').html(tdstr);
+				}
+			});			
+		}
+		function deleteban(id)
+		{
+			$.ajax({
+				url:'/deleteVideo?id='+id,
+				type:'post',
+				async:'false',
+				success:function(data)
+				{
+					var msg=eval(data);
+					if(msg.code='success')
+					{
+						window.location.reload();
+					}else
+					{	
+						$('#messageModal').modal({backdrop: 'static', keyboard: false});
+						$("#messageModal #myModalLabel").html("错误！");
+						$("#messageModal #myModalContent").html(msg.message+"!");
+					}
+
+				}
+			});	
+		}
+    </script>
+  </body>
+</html>
+
+

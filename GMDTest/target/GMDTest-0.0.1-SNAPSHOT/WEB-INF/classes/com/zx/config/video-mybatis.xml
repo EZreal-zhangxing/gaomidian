@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE
+mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="/">
+
+	<select id="selectAllvideo" resultType="com.zx.Pojo.Video">
+		select a.*,b.title as title,b.id as articelId from video a left join artical b on a.id=b.videoId
+	</select>
+	<delete id="deleteVideo" parameterType="java.lang.String">
+		delete from video where id=#{id}
+	</delete>
+	<insert id="saveVideo" parameterType="com.zx.Pojo.Video">
+		insert into video(videoName,videoPath,filesize) values(#{videoName},#{videoPath},#{filesize})
+	</insert>
+	<select id="selectVideoByid" parameterType="java.lang.String" resultType="com.zx.Pojo.Video">
+		select * from video where id=#{id}
+	</select>
+	<select id="selectVideoByname" parameterType="com.zx.Pojo.Video" resultType="com.zx.Pojo.Video">
+		select * from video where videoName=#{videoName}
+	</select>
+	
+	<update id="updateArticelByfileid" parameterType="java.lang.String">
+		update artical set videoId = null where videoId=#{id}
+	</update>
+</mapper>
